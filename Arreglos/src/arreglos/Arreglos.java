@@ -201,7 +201,7 @@ public class Arreglos {
                 "Maximo elemento",
                 "Minimo elemnto"
             };
-            return (String)JOptionPane.showInputDialog(null, "Seleccione una carrera a cursar", "Carrera", JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+            return (String)JOptionPane.showInputDialog(null, "Seleccione una opcion", "Opciones", JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
         }   
         
         public int input(String message) {
