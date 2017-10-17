@@ -44,7 +44,7 @@ public class OperacionesConArreglos {
                     } while (opcion2 < 0 || opcion2 > 2);
                     switch (opcion2) {
                         case(1):
-                            dialog.showMessage("El nuumeo esta en la posicion "+
+                            dialog.showMessage("El numeo esta en la posicion "+
                             metodos.busquedaBinaria(
                                     arreglo,
                                     0, arreglo.length,
@@ -64,7 +64,8 @@ public class OperacionesConArreglos {
                     metodos.presentarArreglo(arreglo);
                     break;
                 case(6):
-                    //metodos.eliminarElemento();
+                    arreglo = metodos.eliminarElemento(arreglo);
+                    metodos.presentarArreglo(arreglo);
                     break;
             }
             
@@ -168,6 +169,26 @@ public class OperacionesConArreglos {
                 return this.busquedaBinaria(arreglo, start, mid, num);
             }
             return this.busquedaBinaria(arreglo, mid, end, num);
+        }
+        
+        public int[] eliminarElemento(int[] arreglo) {
+            
+            int[] newArreglo = new int[arreglo.length - 1];
+            int index;
+            
+            do {
+                index = Integer.parseInt(
+                        this.dialog.inputMessage("Ingrese un indice valido del elemento a eliminar: "));
+            } while (index < 0 || index >= arreglo.length);
+            
+            for (int i = 0, j = 0; j < newArreglo.length; i++, j++) {
+                if (i == index) {
+                    i++;
+                }
+                newArreglo[j] = arreglo[i];
+            }
+            
+            return newArreglo;
         }
     }
     
