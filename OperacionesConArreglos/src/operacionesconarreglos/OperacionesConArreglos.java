@@ -173,8 +173,15 @@ public class OperacionesConArreglos {
         
         public int[] eliminarElemento(int[] arreglo) {
             
-            int[] newArreglo = new int[arreglo.length - 1];
+            int[] newArreglo;
             int index;
+            
+            if (arreglo.length == 0) {
+                this.dialog.showMessage("No se puede eliminar mas elementos.");
+                return arreglo;
+            }
+            
+            newArreglo = new int[arreglo.length - 1];
             
             do {
                 index = Integer.parseInt(
