@@ -139,7 +139,7 @@ public class Arreglos {
             }
             this.dialog.print("El numero ingresado no se encuentra en el arreglo");        
         }
-
+        
         public void eliminar() {
             int index = this.dialog.input("Ingrese el indice");
             
