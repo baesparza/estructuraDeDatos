@@ -53,13 +53,10 @@ public class OperacionesConArreglos {
                     } while (opcion2 < 0 || opcion2 > 2);
                     switch (opcion2) { // ask for num to be searched, then print position
                         case(1): // binary rearch and print position, also send parameters to work
-                            dialog.showMessage("El numero esta en la posicion "+
-                                    metodos.busquedaBinaria(dialog.inputMessage("Ingrese el numero a buscar: ")));
+                            dialog.showMessage(metodos.busquedaBinaria(dialog.inputMessage("Ingrese el numero a buscar: ")));
                             break;
                         case(2): // normal search 
-                            dialog.showMessage(String.format(
-                                    "El numero se encuentra en la posicion %d",
-                                    metodos.busquedaLineal(dialog.inputMessage("Ingrese un numero a buscar: "))));
+                            dialog.showMessage(String.format(metodos.busquedaLineal(dialog.inputMessage("Ingrese un numero a buscar: "))));
                             break;
                     }
                     metodos.presentarArreglo(); // present array after search
@@ -147,32 +144,32 @@ public class OperacionesConArreglos {
             this.size++;
         }
         
-        public int busquedaLineal(int num) {
+        public String busquedaLineal(int num) {
             // search item while looping through the array
             for (int i = 0; i < this.size; i++) {
                 if (num == arreglo[i]) { // return the index if item exists
-                    return i;
+                    return String.format("El numero esta en la posicion %d", i);// return message saying were the item is
                 }
             }
-            return -1; // return -1 if item doesn`t exist
+            return String.format("El numero no se encuentra en el arreglo"); // return the item doesn`t exists
         }
         
-        public int busquedaBinaria(int num) {
+        public String busquedaBinaria(int num) {
             return this.startBusquedaBinaria(this.arreglo, 0, this.size, num);
         }
         
-        private int startBusquedaBinaria(int[] arreglo, int start, int end, int num) {
+        private String startBusquedaBinaria(int[] arreglo, int start, int end, int num) {
             // binary search method
             int mid = (end + start) / 2; // find middle to divide the array
             if (end - start <= 1) { // check if array can`t be devided
-                // return i if num is in the array
+                // return if num is in the array
                 if (arreglo[end] == num) {
-                    return end;
+                    return String.format("El numero esta en la posicion %d", end);
                 } 
                 if (arreglo[start] == num) {
-                    return start;
+                    return String.format("El numero esta en la posicion %d", start);
                 }
-                return -1; // if the num doent exist
+                return String.format("El numero no se encuentra en el arreglo"); // if the num doent exist
             }
             // check in which part of the array may be the num
             if (num <= arreglo[mid]) {
@@ -224,8 +221,8 @@ public class OperacionesConArreglos {
                             + "1. Ingresar Arreglo\n"
                             + "2. Presentar Arreglo\n"
                             + "3. Ordenar Arreglo\n"
-                            + "4. Ingresar Elemento\n"
-                            + "5. Buscar Elemento y Ordenar Arreglo\n"
+                            + "4. Insertar Elemento\n"
+                            + "5. Buscar Elemento\n"
                             + "6. Eliminar Elementeo\n"
                             + "0. Salir...\n"
                             + "-> ");
