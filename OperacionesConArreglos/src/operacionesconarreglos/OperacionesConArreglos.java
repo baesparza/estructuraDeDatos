@@ -8,9 +8,6 @@ import java.util.Scanner;
  */
 public class OperacionesConArreglos {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         int opcion, opcion2;
         Dialog dialog = new Dialog();
@@ -32,7 +29,21 @@ public class OperacionesConArreglos {
                     metodos.presentarArreglo();
                     break;
                 case(4): // insert element and print array
-                    metodos.insertarEnArreglo();
+                    if (metodos.PuedeInsertarElemento()) {// check if available space
+                        dialog.showMessage("ARREGLO LLENO!!");
+                        return;
+                    }
+                    do { // check if index is in range
+                        opcion2 = dialog.inputMessage(dialog.opcionesInsertar());// ask where the new item is going to be
+                    } while (opcion2 < 1 || opcion2 > 2);
+                    switch (opcion2) {
+                        case(1): // push to the end
+                            metodos.insertarFinal();
+                            break;
+                        case(2): // ask for the index
+                            metodos.insertarEnArreglo();
+                            break;
+                    }
                     metodos.presentarArreglo();
                     break;
                 case(5): // sort array and ask the type of search user whants
@@ -113,34 +124,27 @@ public class OperacionesConArreglos {
             }
         }
         
+        public Boolean PuedeInsertarElemento() {
+            return this.size == this.arreglo.length;
+        }
+        
         public void insertarEnArreglo () {
-            int opc; // option
-            int index; // check and use index
-            if (this.size == this.arreglo.length) {// check if available space
-                this.dialog.showMessage("ARREGLO LLENO!!");
-                return;
-            }
+            int index;
             do { // check if index is in range
-                opc = this.dialog.inputMessage(this.dialog.opcionesInsertar());// ask where the new item is going to be
-            } while (opc < 1 || opc > 2);
-            switch (opc) {
-                case(1): // push to the end
-                    this.arreglo[this.size] = this.dialog.inputMessage("Ingrese el nuevo elemento: ");// ask for the new values
-                    this.size++;
-                    return;
-                case(2): // ask for the index
-                    do { // check if index is in range
-                        index = this.dialog.inputMessage(// ask where the new item is going to be
-                                String.format("Ingrese un indice valido(0 a %d): ", this.size));
-                    } while (index < 0 || index > this.size);
-                    for (int i = this.size; i > index; i--) {// moves items to the left to inser the new item 
-                        arreglo[i] = arreglo[i - 1];
-                    }
-                    arreglo[index] = this.dialog.inputMessage("Ingrese el nuevo elemento: ");// ask for the new values
-                    this.size++; // increment the size of array
-                    return;
+                index = this.dialog.inputMessage(// ask where the new item is going to be
+                        String.format("Ingrese un indice valido(0 a %d): ", this.size));
+            } while (index < 0 || index > this.size);
+            for (int i = this.size; i > index; i--) {// moves items to the left to inser the new item 
+                arreglo[i] = arreglo[i - 1];
             }
-            
+            arreglo[index] = this.dialog.inputMessage("Ingrese el nuevo elemento: ");// ask for the new values
+            this.size++; // increment the size of array
+            return;
+        }
+        
+        public void insertarFinal() {
+            this.arreglo[this.size] = this.dialog.inputMessage("Ingrese el nuevo elemento: ");// ask for the new values
+            this.size++;
         }
         
         public int busquedaLineal(int num) {
