@@ -46,7 +46,22 @@ public class Principal {
     }
     
     public void removeNumFromList(int num) {
-        
+        if (this.head == null) return;
+        while (this.head.value == num) { // check if first item has to be removed, if true, then check i the second has to
+            this.head = this.head.next;
+            if (this.head == null) return; // check if we have arrived to the end of the list | avoid <null>.next err
+        }
+        ListNode actual = this.head; // to know were we are
+        ListNode preview = null; // can return to last node
+        while (actual != null) { // check if we have arrived to the end of the list
+            if (actual.value == num) { // the node we are has the vlue we have to remove
+                preview.next = actual.next; // we tell the last node.next to our current node.next, since we don`t need this mode
+                actual = actual.next; // keep iterating trough the list
+            } else {
+                preview = actual; // set the preview node to the actual
+                actual = actual.next; // keep iterating trough the list
+            }
+        }
     }
     
     public void searchElement(int num) {
