@@ -14,13 +14,13 @@ public class Principal {
         this.head = null;
     }
         
-    public void insertNode(int value) {
+    public void insertAtTheBegginning(int value) {
         ListNode temp = new ListNode(value); // we create the node to be added before the first node
         temp.next = this.head; // we point head since head will point to the new node
         this.head = temp; // head point to the new node that point to preview head, now 2nd in the list node
     }
     
-    public void addNode(int value) {
+    public void addAtTheEnd(int value) {
         if (this.head == null) { // chech if there are available nodes
             this.head = new ListNode(value); // since we dont have nodes, we create a ne one and break
             return;
@@ -45,27 +45,23 @@ public class Principal {
         ListNode actual = this.head;
     }
     
-    public void removeElementFromList(int num) {
+    public void removeNumFromList(int num) {
         
     }
     
     public void searchElement(int num) {
-        if (this.head == null) {
-            System.out.println("Lista Vacia");
-            return;
-        }
-        ListNode actual = this.head;
-        while (actual != null) {
-            if (actual.value == num){
+        ListNode actual = this.head; // secure our head,
+        while (actual != null) { // check if we have items in linked list, and iterate trought all elements in the list
+            if (actual.value == num){ // if we found the value we output a message saying we found it, and break the function
                 System.out.println("El elemento se encuenta en la lista");
                 return;
             }
-            actual = actual.next;
+            actual = actual.next; // keep iterating
         }
-        System.out.println("No se enconto en la lista");
+        System.out.println("No se enconto en la lista"); // say we didn`t found the element searched
     }
     
-    public void printAll() {
+    public void printLinkedList() {
         ListNode actual = this.head; // we secure our head
         while (actual != null) {
             System.out.print(String.format("[%d] -> ", actual.value)); // iterate and print each node value
@@ -85,28 +81,40 @@ public class Principal {
                 System.out.print("Ingese una opcion\n"
                         + "\t1. Insertar nuevo nodo al principio\n"
                         + "\t2. Presentar lista\n"
-                        + "\t3. Añadir nodo\n"
-                        + "\t3. Buscar valor\n"
+                        + "\t3. Añadir nodo al final\n"
+                        + "\t4. Buscar nodo\n"
+                        + "\t5. Ordenar lista\n"
+                        + "\t6. Eliminar nodo con valor\n"
+                        + "\t7. Eliminar ultimo nodo\n"
                         + "\t0. Salir\n"
                         + "\t-> ");
                 opcion = input.nextInt();
-            } while (opcion < 0 || opcion > 4);
+            } while (opcion < 0 || opcion > 7);
             switch(opcion) {
-                case 1:
-                    // ask for the new value and add new node
+                case 1: // insert at the beggining
                     System.out.print("Ingrese el nuevo valor: ");
-                    lista.insertNode(input.nextInt());
+                    lista.insertAtTheBegginning(input.nextInt());
                     break;
-                case 2:
-                    lista.printAll();
+                case 2: // print elements
+                    lista.printLinkedList();
                     break;
-                case 3:
+                case 3: // add at the end
                     System.out.print("Ingrese el nuevo valor: ");
-                    lista.addNode(input.nextInt());
+                    lista.addAtTheEnd(input.nextInt());
                     break;
-                case 4:
+                case 4: // search element
                     System.out.print("Ingrese el valor a buscar: ");
                     lista.searchElement(input.nextInt());
+                    break;
+                case 5: // Sort elements
+                    lista.sortList();
+                    break;
+                case 6: // remove element form array
+                    System.out.print("Ingrese el valor a eliminar: ");
+                    lista.removeNumFromList(input.nextInt());
+                    break;
+                case 7: // remove last node
+                    lista.deleteLastElement();
                     break;
             }  
         } while (opcion != 0);
