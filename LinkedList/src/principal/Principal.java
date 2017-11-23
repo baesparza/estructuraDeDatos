@@ -43,9 +43,26 @@ public class Principal {
     
     public void sortList() {
         if (this.head == null || this.head.next == null) return;
-        ListNode min;
+        ListNode helper = new ListNode(0); //new starter of the sorted list
+	ListNode actual = this.head; //the node will be inserted
+	ListNode preview = helper; //insert node between pre and pre.next
+	ListNode next = null; //the next node will be inserted
+	//not the end of input list
+	while( actual != null ){
+            next = actual.next;
+            //find the right place to insert
+            while( preview.next != null && preview.next.value < actual.value ){
+            	preview = preview.next;
+            }
+            //insert between pre and pre.next
+            actual.next = preview.next;
+            preview.next = actual;
+            preview = helper;
+            actual = next;
+	}
+        this.head = helper;
+        /*
         for (ListNode i = this.head; i.next != null; i = i.next) {
-            min = new ListNode(i.value);
             for (ListNode j = i.next; j != null; j = j.next) {
                 if (i.value > j.value) {
                     int temp = i.value;
@@ -54,10 +71,7 @@ public class Principal {
                 }
             }  
         }
-    }
-    
-    public void insertSorted() {
-        
+        */
     }
     
     public void removeNumFromList(int num) {
