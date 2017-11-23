@@ -42,7 +42,22 @@ public class Principal {
     }
     
     public void sortList() {
-        ListNode actual = this.head;
+        if (this.head == null || this.head.next == null) return;
+        ListNode min;
+        for (ListNode i = this.head; i.next != null; i = i.next) {
+            min = new ListNode(i.value);
+            for (ListNode j = i.next; j != null; j = j.next) {
+                if (i.value > j.value) {
+                    int temp = i.value;
+                    i.value = j.value;
+                    j.value = temp;
+                }
+            }  
+        }
+    }
+    
+    public void insertSorted() {
+        
     }
     
     public void removeNumFromList(int num) {
