@@ -43,9 +43,9 @@ public class Principal {
     
     public void sortList() {
         if (this.head == null || this.head.next == null) return;
-        ListNode helper = new ListNode(0); //new starter of the sorted list
+        ListNode newList = new ListNode(0); //new starter of the sorted list
 	ListNode actual = this.head; //the node will be inserted
-	ListNode preview = helper; //insert node between pre and pre.next
+	ListNode preview = newList; //insert node between pre and pre.next
 	ListNode next = null; //the next node will be inserted
 	//not the end of input list
 	while( actual != null ){
@@ -57,10 +57,10 @@ public class Principal {
             //insert between pre and pre.next
             actual.next = preview.next;
             preview.next = actual;
-            preview = helper;
+            preview = newList;
             actual = next;
 	}
-        this.head = helper;
+        this.head = newList.next;
         /*
         for (ListNode i = this.head; i.next != null; i = i.next) {
             for (ListNode j = i.next; j != null; j = j.next) {
