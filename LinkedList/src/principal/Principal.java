@@ -61,17 +61,6 @@ public class Principal {
             actual = next;
 	}
         this.head = newList.next;
-        /*
-        for (ListNode i = this.head; i.next != null; i = i.next) {
-            for (ListNode j = i.next; j != null; j = j.next) {
-                if (i.value > j.value) {
-                    int temp = i.value;
-                    i.value = j.value;
-                    j.value = temp;
-                }
-            }  
-        }
-        */
     }
     
     public void removeNumFromList(int num) {
